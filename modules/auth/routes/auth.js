@@ -62,12 +62,13 @@ router.post('/register', rateLimiters.registerLimiter, async (req, res) => {
         );
         const user = userResult.rows[0];
 
-        // Generate JWT - INCLUDE BOTH id AND userId
+        // Generate JWT - INCLUDE id, userId, email, AND is_admin
         const token = jwt.sign(
-            { 
+            {
                 id: user.id,
-                userId: user.id, 
-                email: user.email 
+                userId: user.id,
+                email: user.email,
+                is_admin: user.is_admin || false
             },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
@@ -130,12 +131,13 @@ router.post('/login', rateLimiters.loginLimiter, async (req, res) => {
             return res.status(401).json({ success: false, error: 'Invalid credentials' });
         }
 
-        // Generate JWT - INCLUDE BOTH id AND userId
+        // Generate JWT - INCLUDE id, userId, email, AND is_admin
         const token = jwt.sign(
-            { 
+            {
                 id: user.id,
-                userId: user.id, 
-                email: user.email 
+                userId: user.id,
+                email: user.email,
+                is_admin: user.is_admin || false
             },
             process.env.JWT_SECRET,
             { expiresIn: '24h' }
@@ -154,6 +156,7 @@ router.post('/login', rateLimiters.loginLimiter, async (req, res) => {
             }
         });
     } catch (error) {
+        console.error('Login error:', error);
         res.status(500).json({ success: false, error: 'Login failed' });
     }
 });
