@@ -1,0 +1,17 @@
+{
+  "name": "booking",
+  "version": "2.0.0",
+  "description": "Universal booking/appointment system with PostgreSQL",
+  "database": "postgresql",
+  "routes": "routes/booking.js",
+  "apiPrefix": "/api/bookings",
+  "dependencies": ["auth"],
+  "tables": ["bookings"],
+  "features": [
+    "Create bookings",
+    "Available time slots",
+    "Cancel/reschedule",
+    "User booking history",
+    "Conflict detection"
+  ]
+}

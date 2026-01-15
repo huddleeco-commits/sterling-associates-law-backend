@@ -1,0 +1,10 @@
+{
+  "name": "documents",
+  "type": "backend",
+  "source": "family-huddle",
+  "extractedAt": "2026-01-08T13:05:46.370Z",
+  "files": [
+    "routes/documents.js",
+    "services/documents.js"
+  ]
+}
